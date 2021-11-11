@@ -1,8 +1,6 @@
-package by.epam.task04.entity.impl;
+package by.epam.task04.entity;
 
 
-import by.epam.task04.entity.TextComponent;
-import by.epam.task04.entity.TextComponentType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

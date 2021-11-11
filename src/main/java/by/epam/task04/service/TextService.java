@@ -6,7 +6,7 @@ import by.epam.task04.exception.TextException;
 import java.util.List;
 
 public interface TextService {
-    void sortParagraphsBySentenceCount(TextComponent component) throws TextException;
+    void sortParagraphBySentenceCount(TextComponent component) throws TextException;
 
     List<TextComponent> findSentencesContainingLongestWord(TextComponent component) throws TextException;
 

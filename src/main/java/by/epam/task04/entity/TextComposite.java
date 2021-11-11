@@ -1,7 +1,4 @@
-package by.epam.task04.entity.impl;
-
-import by.epam.task04.entity.TextComponent;
-import by.epam.task04.entity.TextComponentType;
+package by.epam.task04.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +8,7 @@ public class TextComposite implements TextComponent {
     private List<TextComponent> components = new ArrayList<>();
     private TextComponentType type;
 
-    public TextComposite( TextComponentType type) {
+    public TextComposite(TextComponentType type) {
         this.type = type;
     }
 

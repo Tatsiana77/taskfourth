@@ -1,9 +1,8 @@
 package by.epam.task04.parser;
 
+import by.epam.task04.entity.TextComponent;
 import by.epam.task04.exception.TextException;
 
-import java.awt.*;
-
-public interface InformationParser {
+public interface InfoParser {
     TextComponent parse(String text) throws TextException;
 }

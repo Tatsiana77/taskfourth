@@ -1,13 +1,52 @@
 package by.epam.task04.parser.impl;
 
+import by.epam.task04.entity.SymbolLeaf;
+import by.epam.task04.entity.TextComponent;
+import by.epam.task04.entity.TextComponentType;
+import by.epam.task04.entity.TextComposite;
 import by.epam.task04.exception.TextException;
-import by.epam.task04.parser.InformationParser;
+import by.epam.task04.parser.InfoParser;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.awt.*;
+public class LexemeParser implements InfoParser {
+    private static final Logger logger = LogManager.getLogger();
+    private static final String LEXEME_SPLIT_REGEX = "(?=([?,!-]|((?<!\\.)\\.(?!\\.))|(\\.{3}))$)|((?<=^\\()(?![0-9~]))|((?<=[a-zA-Z])(?=\\)))";
+    private static final String WORD_REGEX = "[а-яА-Я\\w'-]+";
+    private static final String PUNCTUATION_REGEX = "[?.,!)(-]|((?<!\\.)\\.(?!\\.))|(\\.{3})";
+    private InfoParser wordParser;
+    private InfoParser expressionParser;
 
-public class LexemeParser implements InformationParser {
+
+    public LexemeParser(InfoParser wordParser, InfoParser expressionParser) {
+        this.wordParser = wordParser;
+        this.expressionParser = expressionParser;
+    }
+
     @Override
     public TextComponent parse(String text) throws TextException {
-        return null;
+        if (wordParser == null || expressionParser == null) {
+            logger.log(Level.ERROR, "At least one of parsers is not specified");
+            throw new TextException("At least one of parsers is not specified");
+        }
+
+        String[] lexemes = text.split(LEXEME_SPLIT_REGEX);
+        var component = new TextComposite(TextComponentType.LEXEME);
+        for (String lexeme : lexemes) {
+            TextComponent currentComponent;
+            if (lexeme.matches(WORD_REGEX)) {
+                currentComponent = wordParser.parse(lexeme);
+            } else if (lexeme.matches(WORD_REGEX) && lexeme.length() == 1) {
+                currentComponent = new SymbolLeaf(TextComponentType.SYMBOL, lexeme.charAt(0));
+            } else if (lexeme.matches(PUNCTUATION_REGEX)) {
+                currentComponent = new SymbolLeaf(TextComponentType.PUNCTUATION, lexeme.charAt(0));
+            } else {
+                currentComponent = expressionParser.parse(lexeme);
+            }
+            component.add(currentComponent);
+        }
+        logger.log(Level.INFO, "Lexeme parsed successfully: " + text);
+        return component;
     }
 }

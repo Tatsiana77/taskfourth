@@ -5,9 +5,12 @@ public enum TextComponentType {
     PARAGRAPH(" "),
     SENTENCE(" "),
     LEXEME(""),
-    WORD("");
+    WORD(""),
+    SYMBOL(""),
+    PUNCTUATION("");
 
-    private final  String delimit;
+
+    private final String delimit;
 
     TextComponentType(String delimit) {
         this.delimit = delimit;

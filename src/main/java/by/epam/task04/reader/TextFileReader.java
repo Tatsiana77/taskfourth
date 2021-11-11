@@ -19,8 +19,8 @@ public class TextFileReader {
 
     public List<String> readFile(String filePathString) throws TextException {
         if (!TextFileValidator.isValidFile(filePathString)) {
-            logger.log(Level.ERROR, "File path represents invalid file");
-            throw new TextException("File path represents invalid file");
+            logger.log(Level.ERROR, "File path present invalid file");
+            throw new TextException("File path present invalid file");
         }
         Path path = Paths.get(filePathString);
         List<String> textLines;
@@ -28,7 +28,7 @@ public class TextFileReader {
             textLines = fileLines.collect(Collectors.toList());
         } catch (IOException e) {
             logger.log(Level.ERROR, "Error while reading file {}", filePathString);
-            throw new TextException("Error while reading file " + filePathString);
+            throw new TextException("Error  reading file " + filePathString);
         }
         logger.log(Level.INFO, "Text was read in file: {}", filePathString);
         return textLines;
