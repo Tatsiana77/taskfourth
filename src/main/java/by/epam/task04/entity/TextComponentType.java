@@ -1,22 +1,30 @@
 package by.epam.task04.entity;
 
 public enum TextComponentType {
-    TEXT(" \n\t"),
-    PARAGRAPH(" "),
-    SENTENCE(" "),
-    LEXEME(""),
-    WORD(""),
-    SYMBOL(""),
-    PUNCTUATION("");
+    TEXT(" \n\t", ""),
+    PARAGRAPH(" ", ""),
+    SENTENCE(" ", ""),
+    LEXEME("", ""),
+    WORD("", ""),
+    PUNCTUATION("", "");
 
 
-    private final String delimit;
+    private String prefix = "";
+    private String suffix = "";
 
-    TextComponentType(String delimit) {
-        this.delimit = delimit;
+    TextComponentType(String prefix, String suffix) {
+        this.prefix = prefix;
+        this.suffix = suffix;
     }
 
-    public String getDelimit() {
-        return delimit;
+    TextComponentType() {
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public String getSuffix() {
+        return suffix;
     }
 }

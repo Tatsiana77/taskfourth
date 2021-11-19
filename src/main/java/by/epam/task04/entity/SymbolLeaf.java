@@ -1,6 +1,5 @@
 package by.epam.task04.entity;
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,24 +12,31 @@ public class SymbolLeaf implements TextComponent {
     private TextComponentType type;
     private char symbol;
 
-    public SymbolLeaf(TextComponentType type, char symbol) {
+    public SymbolLeaf(TextComponentType type) {
         this.type = type;
+
+    }
+
+    public SymbolLeaf(char symbol) {
         this.symbol = symbol;
     }
 
     @Override
     public boolean add(TextComponent component) {
-        return false;
+        logger.info("Operation is not available of this component");
+        throw new UnsupportedOperationException("Operation is not available of this component");
     }
 
     @Override
     public boolean remove(TextComponent component) {
-        return false;
+        logger.info("Operation is not available of this component");
+        throw new UnsupportedOperationException("Operation is not available of this component");
     }
 
     @Override
     public List<TextComponent> getChildren() {
-        return null;
+        logger.info("Operation is not available of this component");
+        throw new UnsupportedOperationException("Operation is not available of this component");
     }
 
     @Override

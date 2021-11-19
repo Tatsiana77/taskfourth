@@ -14,17 +14,17 @@ public class TextComposite implements TextComponent {
 
     @Override
     public boolean add(TextComponent component) {
-        return false;
+        return components.add(component);
     }
 
     @Override
     public boolean remove(TextComponent component) {
-        return false;
+        return components.remove(component);
     }
 
     @Override
     public List<TextComponent> getChildren() {
-        return null;
+        return new ArrayList<TextComponent>(components);
     }
 
     @Override
@@ -50,9 +50,10 @@ public class TextComposite implements TextComponent {
 
     @Override
     public String toString() {
-        return "TextComposite{" +
-                "components=" + components +
-                ", type=" + type +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(type.getPrefix());
+        components.forEach(c -> stringBuilder.append(c.toString()));
+        stringBuilder.append(type.getSuffix());
+        return stringBuilder.toString();
     }
 }

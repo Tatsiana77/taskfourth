@@ -1,20 +1,24 @@
 package by.epam.task04.parser;
 
+import by.epam.task04.entity.TextComponent;
 import by.epam.task04.entity.TextComponentType;
 import by.epam.task04.entity.TextComposite;
 
-import java.util.List;
+public class LexemeParser extends AbstractTextParser {
+    private static final String LEXEME_SPLIT_REGEX = "\\s";
 
-public class LexemeParser extends TextAbstractParser {
-    private static final String LEXEME_REGEX = "\\s";
+    public LexemeParser() {
+        this.nextParser = new WordParser();
+    }
 
     @Override
-    public void parse(TextComposite composite, String part) {
-        List<String> lexemes = List.of(part.split(LEXEME_REGEX));
+    public void parse(TextComponent component, String textPart) {
+        String[] lexemes = textPart.split(LEXEME_SPLIT_REGEX);
+
         for (String lexeme : lexemes) {
-            TextComposite lexemeComposite = new TextComposite(TextComponentType.LEXEME);
-            composite.add(lexemeComposite);
-            nextParser.parse(lexemeComposite, lexeme);
+            TextComponent lexemeComponent = new TextComposite(TextComponentType.LEXEME);
+            component.add(lexemeComponent);
+            nextParser.parse(lexemeComponent, lexeme);
         }
     }
 }
